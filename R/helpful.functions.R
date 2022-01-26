@@ -1,0 +1,87 @@
+
+#' Calculate patient-specific treatment effect
+#'
+#' Function for calculating the patient-specific treatment effect.
+#' Patient-specific treatment effect includes the main effect of treatment and 
+#' treatment-covariate interaction effect (i.e. effect modification). 
+#' Reports odds ratio for the binary outcome.
+#' 
+#' @param ipd IPD object created from running ipdma.model type function
+#' @param samples MCMC samples found from running ipd.run function
+#' @param newpatient covariate values of patients that you want to predict treatment effect on. Must have length equal to total number of covariates.
+#' @param reference reference group used for finding patient-specific treatment effect. This is only used for deft approach
+#' @param quantiles quantiles for credible interval of the patient-specific treatment effect
+#' @return patient-specific treatment effect with credible interval at specified quantiles
+#' @examples
+#' ds <- generate_ipdma_example(type = "continuous")
+#' ipd <- with(ds, ipdma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), 
+#' response = "normal", shrinkage = "none"))
+#' \donttest{
+#' samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta"), n.chains = 3, n.burnin = 500, 
+#' n.iter = 5000)
+#' treatment.effect(ipd, samples, newpatient = c(1,0.5))
+#' }
+#' @references Seo M, White IR, Furukawa TA, et al. Comparing methods for estimating patient-specific treatment effects in individual patient data meta-analysis. \emph{Stat Med}. 2021;40(6):1553-1573. \doi{10.1002/sim.8859}
+#' @references Riley RD, Debray TP, Fisher D, et al. Individual participant data meta-analysis to examine interactions between treatment effect and participant-level covariates: Statistical recommendations for conduct and planning. \emph{Stat Med}. 2020:39(15):2115-2137. \doi{10.1002/sim.8516}
+#' 
+#' @export
+
+treatment.effect <- function(ipd = NULL, samples = NULL, newpatient = NULL, 
+                             reference = NULL, quantiles = c(0.025, 0.5, 0.975)){
+
+  
+  if(class(ipd) == "ipdma.onestage"){
+    
+    newpatient <- (newpatient - ipd$scale_mean)/ipd$scale_sd
+      
+    index0 <- which(colnames(samples[[1]]) == "delta[2]") 
+    index1 <- grep("gamma", colnames(samples[[1]]))
+    index <- c(index0, index1)
+    samples2 <- samples[,index]
+    
+    merged <- samples2[[1]]
+    for(i in 2:length(samples2)){
+      merged <- rbind(merged, samples2[[i]])
+    }
+    
+    pred <- merged %*% c(1, newpatient)
+
+    if(ipd$response == "normal"){
+      CI <- quantile(pred, probs = quantiles)
+    } else if(ipd$response == "binomial"){
+      CI <- exp(quantile(pred, probs = quantiles))
+    }
+    names(CI) <- quantiles
+  } else if (class(ipd) == "ipdma.onestage.deft"){
+    
+    if(is.null(reference)){
+      stop("Need to specify reference group for deft approach")
+    }
+    newpatient <- newpatient - reference
+    
+    index0 <- which(colnames(samples[[1]]) == "delta[2]") 
+    index1 <- grep("gamma.within", colnames(samples[[1]]))
+    index <- c(index0, index1)
+    samples2 <- samples[,index]
+    
+    merged <- samples2[[1]]
+    for(i in 2:length(samples2)){
+      merged <- rbind(merged, samples2[[i]])
+    }
+    
+    pred <- merged %*% c(1, newpatient)
+
+    if(ipd$response == "normal"){
+      CI <- quantile(pred, probs = quantiles)
+    } else if(ipd$response == "binomial"){
+      CI <- exp(quantile(pred, probs = quantiles)) 
+    }
+    names(CI) <- quantiles
+    
+  } else{
+    stop("Calculating patient specific treatment effect is not yet implemented for this method")
+  }
+  
+  return(CI)
+}
+
