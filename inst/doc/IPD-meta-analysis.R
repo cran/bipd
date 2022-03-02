@@ -8,7 +8,7 @@ library(bipd)
 ##load in data
 ds <- generate_ipdma_example(type = "continuous")
 ds2 <- generate_ipdma_example(type = "binary")
-head(ds2)
+head(ds)
 
 ## -----------------------------------------------------------------------------
 # continuous outcome
@@ -30,7 +30,7 @@ treatment.effect(ipd, samples, newpatient = c(1,0.5))
 
 ## -----------------------------------------------------------------------------
 ipd <- with(ds, ipdma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "laplace"))
-samples <- ipd.run(ipd, pars.save = c("lambda", "beta", "gamma", "delta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta", "lambda", "tt"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 summary(samples)
 
 ## -----------------------------------------------------------------------------
@@ -38,4 +38,28 @@ ipd <- with(ds2, ipdma.model.onestage(y = y, study = studyid, treat = treat, X =
 samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 summary(samples)
 treatment.effect(ipd, samples, newpatient = c(1,0.5)) # binary outcome reports odds ratio
+
+## -----------------------------------------------------------------------------
+##load in data
+ds <- generate_ipdnma_example(type = "continuous")
+ds2 <- generate_ipdnma_example(type = "binary")
+head(ds)
+
+## -----------------------------------------------------------------------------
+# continuous outcome
+ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "none"))
+cat(ipd$code)
+samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+summary(samples)
+treatment.effect(ipd, samples, newpatient = c(1,0.5))
+
+## -----------------------------------------------------------------------------
+# SSVS
+ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "SSVS"))
+samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+summary(samples)
+treatment.effect(ipd, samples, newpatient = c(1,0.5))
+# Bayesian LASSO
+#ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "laplace", lambda.prior = list("dgamma",2,0.1)))
+#samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta", "lambda", "tt"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 

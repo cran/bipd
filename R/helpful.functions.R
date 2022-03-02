@@ -30,7 +30,7 @@ treatment.effect <- function(ipd = NULL, samples = NULL, newpatient = NULL,
                              reference = NULL, quantiles = c(0.025, 0.5, 0.975)){
 
   
-  if(class(ipd) == "ipdma.onestage"){
+  if(inherits(ipd, "ipdma.onestage")){
     
     newpatient <- (newpatient - ipd$scale_mean)/ipd$scale_sd
       
@@ -52,7 +52,7 @@ treatment.effect <- function(ipd = NULL, samples = NULL, newpatient = NULL,
       CI <- exp(quantile(pred, probs = quantiles))
     }
     names(CI) <- quantiles
-  } else if (class(ipd) == "ipdma.onestage.deft"){
+  } else if(inherits(ipd, "ipdma.onestage.deft")){
     
     if(is.null(reference)){
       stop("Need to specify reference group for deft approach")
@@ -78,8 +78,33 @@ treatment.effect <- function(ipd = NULL, samples = NULL, newpatient = NULL,
     }
     names(CI) <- quantiles
     
-  } else{
-    stop("Calculating patient specific treatment effect is not yet implemented for this method")
+  } else if(inherits(ipd, "ipdnma.onestage")){
+
+    newpatient <- (newpatient - ipd$scale_mean)/ipd$scale_sd
+    
+    store_result <- list()
+    for(ii in 2:ipd$data.JAGS$Ntreat){
+      
+      index0 <- which(colnames(samples[[1]]) == paste0("delta[", ii, "]"))  
+      index1 <- grep(paste0("gamma\\[", ii, ","), colnames(samples[[1]]))
+      index <- c(index0, index1)
+      samples2 <- samples[,index]
+      
+      merged <- samples2[[1]]
+      for(i in 2:length(samples2)){
+        merged <- rbind(merged, samples2[[i]])
+      }
+      pred <- merged %*% c(1, newpatient)
+      
+      if(ipd$response == "normal"){
+        CI <- quantile(pred, probs = quantiles)
+      } else if(ipd$response == "binomial"){
+        CI <- exp(quantile(pred, probs = quantiles))
+      }
+      names(CI) <- quantiles
+      store_result[[paste0("treatment ", ii)]] <- CI
+    }
+    return(store_result)
   }
   
   return(CI)

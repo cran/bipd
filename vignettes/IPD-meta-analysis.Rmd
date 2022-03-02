@@ -24,7 +24,7 @@ library(bipd)
 ##load in data
 ds <- generate_ipdma_example(type = "continuous")
 ds2 <- generate_ipdma_example(type = "binary")
-head(ds2)
+head(ds)
 ```
 
 The main function to set up the function for one-stage IPD meta-analysis is ipdma.model.onestage function. Refer to help(ipdma.model.onestage) for more details. Briefly to describe, "y" is the outcome of the study; "study" is a vector indicating which study the patient belongs to in a numerical sequence (i.e. 1, 2, 3, etc); "treat" is a vector indicating which treatment the patient was assigned to (i.e. 1 for treatment, 0 for placebo); "x" is a matrix of covariates for each patients; "response" is the outcome type, either "normal" or "binomial".
@@ -36,7 +36,7 @@ Another important parameter is the "shrinkage" parameter. To specify IPD meta-an
 ipd <- with(ds, ipdma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "none"))
 ```
 
-To view the JAGS code that was used to run the model, we can run the following command. Note that "alpha" is the study intercept, "beta" is the coefficient for main effects of the covariates, "gamma" is the coefficient for effect modifier, and "delta" is the average treatment effect.
+To view the JAGS code that was used to run the model, we can run the following command. Note that "alpha" is the study intercept, "beta" is the coefficient for main effects of the covariates, "gamma" is the coefficient for effect modifier, and "delta" is the average treatment effect. 
 
 ```{r}
 cat(ipd$code)
@@ -61,11 +61,11 @@ treatment.effect(ipd, samples, newpatient = c(1,0.5))
 
 ## Incorporating shrinkage and variable selection
 
-For the second example, let's use the same data, but include shrinkage (i.e. Bayesian LASSO) in the effect modifiers. We can specify Bayesian LASSO by setting shrinkage = "laplace". Lambda is the shrinkage parameter and we can set the prior for lambda using lambda.prior parameter. The default lambda prior for Bayesian LASSO is $\lambda^{-1} \sim dunif(0,5)$.
+For the second example, let's use the same data, but include shrinkage (i.e. Bayesian LASSO) in the effect modifiers (i.e. treatment-covariate interactions). We can specify Bayesian LASSO by setting shrinkage = "laplace". Lambda is the shrinkage parameter and we can set the prior for lambda using lambda.prior parameter. The default lambda prior for Bayesian LASSO is $\lambda^{-1} \sim dunif(0,5)$.
 
 ```{r}
 ipd <- with(ds, ipdma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "laplace"))
-samples <- ipd.run(ipd, pars.save = c("lambda", "beta", "gamma", "delta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta", "lambda", "tt"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 summary(samples)
 ```
 
@@ -77,3 +77,40 @@ samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta", "Ind", "eta"), 
 summary(samples)
 treatment.effect(ipd, samples, newpatient = c(1,0.5)) # binary outcome reports odds ratio
 ```
+
+## Fitting IPD network meta-analysis
+
+We now demonstrate how to run IPD network meta-analysis using this package.
+
+```{r}
+##load in data
+ds <- generate_ipdnma_example(type = "continuous")
+ds2 <- generate_ipdnma_example(type = "binary")
+head(ds)
+```
+
+The main function to set up the function for one-stage IPD network meta-analysis is ipdnma.model.onestage function. The function is very similar to ipdma.model.onestage except that now we have number of treatments greater than 2. Consequently, "treat" parameter is defined differently i.e. 1 assigns baseline treatment and other treatments should be be assigned 2, 3, 4, etc. 
+
+```{r}
+# continuous outcome
+ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "none"))
+cat(ipd$code)
+samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+summary(samples)
+treatment.effect(ipd, samples, newpatient = c(1,0.5))
+```
+
+We can apply shrinkage on the effect modifiers (treatment-covariate interactions) as before.
+
+```{r}
+# SSVS
+ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "SSVS"))
+samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+summary(samples)
+treatment.effect(ipd, samples, newpatient = c(1,0.5))
+# Bayesian LASSO
+#ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "laplace", lambda.prior = list("dgamma",2,0.1)))
+#samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta", "lambda", "tt"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+```
+
+p.s. Note that in the network meta-analysis literature, "d" usually refers to average treatment effect and "delta" refers to study-specific treatment effect. In this R package, we have flipped around the two notations.
