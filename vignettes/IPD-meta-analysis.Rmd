@@ -13,9 +13,9 @@ vignette: >
 knitr::opts_chunk$set(comment = "#>", message=FALSE, tidy.opts=list(width.cutoff=60), tidy=TRUE, collapse = TRUE, warning = FALSE) 
 ```
 
-## Fitting IPD meta-analysis model
+## Fitting one-stage IPD meta-analysis model
 
-We demonstrate how to run IPD meta-analysis using this package. First, let's generate sample IPD for illustration.
+We demonstrate how to run one-stage IPD meta-analysis using this package. First, let's generate sample IPD for illustration.
 
 ```{r}
 #devtools::install_github("MikeJSeo/bipd")
@@ -45,7 +45,7 @@ cat(ipd$code)
 Once the model is set up using ipdma.model.onestage function, we use ipd.run function to run the model. help(ipd.run) describes possible parameters to specify.
 
 ```{r}
-samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+samples <- ipd.run(ipd, n.chains = 3, n.burnin = 500, n.iter = 5000)
 
 samples <- samples[,-3] #remove delta[1] which is 0
 summary(samples)
@@ -73,12 +73,12 @@ We can also use SSVS (stochastic search variable selection) by setting shrinkage
 
 ```{r}
 ipd <- with(ds2, ipdma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(w1, w2), response = "binomial", shrinkage = "SSVS"))
-samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 summary(samples)
 treatment.effect(ipd, samples, newpatient = c(1,0.5)) # binary outcome reports odds ratio
 ```
 
-## Fitting IPD network meta-analysis
+## Fitting one-stage IPD network meta-analysis
 
 We now demonstrate how to run IPD network meta-analysis using this package.
 
@@ -108,8 +108,8 @@ ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X =
 samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 summary(samples)
 treatment.effect(ipd, samples, newpatient = c(1,0.5))
-# Bayesian LASSO
-#ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "laplace", lambda.prior = list("dgamma",2,0.1)))
+# Bayesian LASSO  
+# ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "laplace", lambda.prior = list("dgamma",2,0.1)))
 #samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta", "lambda", "tt"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 ```
 

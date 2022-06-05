@@ -18,7 +18,7 @@ ipd <- with(ds, ipdma.model.onestage(y = y, study = studyid, treat = treat, X = 
 cat(ipd$code)
 
 ## -----------------------------------------------------------------------------
-samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+samples <- ipd.run(ipd, n.chains = 3, n.burnin = 500, n.iter = 5000)
 
 samples <- samples[,-3] #remove delta[1] which is 0
 summary(samples)
@@ -35,7 +35,7 @@ summary(samples)
 
 ## -----------------------------------------------------------------------------
 ipd <- with(ds2, ipdma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(w1, w2), response = "binomial", shrinkage = "SSVS"))
-samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
+samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 summary(samples)
 treatment.effect(ipd, samples, newpatient = c(1,0.5)) # binary outcome reports odds ratio
 
@@ -59,7 +59,7 @@ ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X =
 samples <- ipd.run(ipd,  pars.save = c("beta", "gamma", "delta", "Ind", "eta"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 summary(samples)
 treatment.effect(ipd, samples, newpatient = c(1,0.5))
-# Bayesian LASSO
-#ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "laplace", lambda.prior = list("dgamma",2,0.1)))
+# Bayesian LASSO  
+# ipd <- with(ds, ipdnma.model.onestage(y = y, study = studyid, treat = treat, X = cbind(z1, z2), response = "normal", shrinkage = "laplace", lambda.prior = list("dgamma",2,0.1)))
 #samples <- ipd.run(ipd, pars.save = c("beta", "gamma", "delta", "lambda", "tt"), n.chains = 3, n.burnin = 500, n.iter = 5000)
 

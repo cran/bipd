@@ -12,11 +12,26 @@
 
 <meta name="author" content="Michael Seo" />
 
-<meta name="date" content="2022-03-02" />
+<meta name="date" content="2022-06-03" />
 
 <title>IPD meta-analysis</title>
 
-<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -28,6 +43,7 @@
     </style>
 
 
+
 <style type="text/css">
   code {
     white-space: pre;
@@ -37,19 +53,19 @@
   }
 </style>
 <style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -69,7 +85,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -127,7 +143,187 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
 
 
 
@@ -141,414 +337,425 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <h1 class="title toc-ignore">IPD meta-analysis</h1>
 <h4 class="author">Michael Seo</h4>
-<h4 class="date">2022-03-02</h4>
+<h4 class="date">2022-06-03</h4>
 
 
 
-<div id="fitting-ipd-meta-analysis-model" class="section level2">
-<h2>Fitting IPD meta-analysis model</h2>
-<p>We demonstrate how to run IPD meta-analysis using this package. First, let’s generate sample IPD for illustration.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># devtools::install_github(&#39;MikeJSeo/bipd&#39;)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bipd)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="do">## load in data</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">generate_ipdma_example</span>(<span class="at">type =</span> <span class="st">&quot;continuous&quot;</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>ds2 <span class="ot">&lt;-</span> <span class="fu">generate_ipdma_example</span>(<span class="at">type =</span> <span class="st">&quot;binary&quot;</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ds)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   studyid treat          z1         z2  y</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       1     1  0.33187521  0.7101855  9</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       1     1 -0.72245273 -0.9292890  8</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       1     0  0.07178859 -0.6249597 11</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       1     0 -1.27064369  0.1865694 11</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       1     1  0.95558567 -0.2267028  7</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6       1     0  1.34256332  0.2777503 11</span></span></code></pre></div>
+<div id="fitting-one-stage-ipd-meta-analysis-model" class="section level2">
+<h2>Fitting one-stage IPD meta-analysis model</h2>
+<p>We demonstrate how to run one-stage IPD meta-analysis using this package. First, let’s generate sample IPD for illustration.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># devtools::install_github(&#39;MikeJSeo/bipd&#39;)</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(bipd)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">## load in data</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>ds &lt;-<span class="st"> </span><span class="kw">generate_ipdma_example</span>(<span class="dt">type =</span> <span class="st">&quot;continuous&quot;</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>ds2 &lt;-<span class="st"> </span><span class="kw">generate_ipdma_example</span>(<span class="dt">type =</span> <span class="st">&quot;binary&quot;</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">head</span>(ds)</span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="co">#&gt;   studyid treat          z1         z2  y</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co">#&gt; 1       1     1 -0.76655048 -0.2846117  9</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="co">#&gt; 2       1     0 -0.75104148 -0.6713279 11</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="co">#&gt; 3       1     0  0.11553318  0.5018156 11</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co">#&gt; 4       1     1 -0.22103264 -0.8402231  8</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="co">#&gt; 5       1     0 -1.00228171  0.8083868 11</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="co">#&gt; 6       1     1 -0.01249973 -0.5759004  8</span></span></code></pre></div>
 <p>The main function to set up the function for one-stage IPD meta-analysis is ipdma.model.onestage function. Refer to help(ipdma.model.onestage) for more details. Briefly to describe, “y” is the outcome of the study; “study” is a vector indicating which study the patient belongs to in a numerical sequence (i.e. 1, 2, 3, etc); “treat” is a vector indicating which treatment the patient was assigned to (i.e. 1 for treatment, 0 for placebo); “x” is a matrix of covariates for each patients; “response” is the outcome type, either “normal” or “binomial”.</p>
 <p>Another important parameter is the “shrinkage” parameter. To specify IPD meta-analysis without shrinkage, we set shrinkage = “none”.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># continuous outcome</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ipd <span class="ot">&lt;-</span> <span class="fu">with</span>(ds, <span class="fu">ipdma.model.onestage</span>(<span class="at">y =</span> y, <span class="at">study =</span> studyid,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> treat, <span class="at">X =</span> <span class="fu">cbind</span>(z1, z2), <span class="at">response =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">shrinkage =</span> <span class="st">&quot;none&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># continuous outcome</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>ipd &lt;-<span class="st"> </span><span class="kw">with</span>(ds, <span class="kw">ipdma.model.onestage</span>(<span class="dt">y =</span> y, <span class="dt">study =</span> studyid,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="dt">treat =</span> treat, <span class="dt">X =</span> <span class="kw">cbind</span>(z1, z2), <span class="dt">response =</span> <span class="st">&quot;normal&quot;</span>, <span class="dt">shrinkage =</span> <span class="st">&quot;none&quot;</span>))</span></code></pre></div>
 <p>To view the JAGS code that was used to run the model, we can run the following command. Note that “alpha” is the study intercept, “beta” is the coefficient for main effects of the covariates, “gamma” is the coefficient for effect modifier, and “delta” is the average treatment effect.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(ipd<span class="sc">$</span>code)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; model {</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ########## IPD-MA model</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for (i in 1:Np) {</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  y[i] ~ dnorm(mu[i], sigma)</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  mu[i] &lt;- alpha[studyid[i]] + inprod(beta[], X[i,]) +</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      (1 - equals(treat[i],1)) * inprod(gamma[], X[i,]) + d[studyid[i],treat[i]]</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sigma ~ dgamma(0.001, 0.001)</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #####treatment effect</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for(j in 1:Nstudies){</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  d[j,1] &lt;- 0</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  d[j,2] ~ dnorm(delta[2], tau)</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sd ~ dnorm(0, 1)T(0,)</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tau &lt;- pow(sd, -2)</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ## prior distribution for the average treatment effect</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1] &lt;- 0</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2] ~ dnorm(0, 0.001)</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ## prior distribution for the study intercept</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for (j in 1:Nstudies){</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  alpha[j] ~ dnorm(0, 0.001)</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ## prior distribution for the main effect of the covariates</span></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for(k in 1:Ncovariate){</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  beta[k] ~ dnorm(0, 0.001)</span></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ## prior distribution for the effect modifiers under no shrinkage</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for(k in 1:Ncovariate){</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  gamma[k] ~ dnorm(0, 0.001) </span></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">cat</span>(ipd<span class="op">$</span>code)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; model {</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; </span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; ########## IPD-MA model</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; for (i in 1:Np) {</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;  y[i] ~ dnorm(mu[i], sigma)</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;  mu[i] &lt;- alpha[studyid[i]] + inprod(beta[], X[i,]) +</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;      (1 - equals(treat[i],1)) * inprod(gamma[], X[i,]) + d[studyid[i],treat[i]]</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; }</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; sigma ~ dgamma(0.001, 0.001)</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; </span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; #####treatment effect</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; for(j in 1:Nstudies){</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;  d[j,1] &lt;- 0</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;  d[j,2] ~ dnorm(delta[2], tau)</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; }</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; sd ~ dnorm(0, 1)T(0,)</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; tau &lt;- pow(sd, -2)</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; </span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; ## prior distribution for the average treatment effect</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; delta[1] &lt;- 0</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; delta[2] ~ dnorm(0, 0.001)</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; </span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; ## prior distribution for the study intercept</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; for (j in 1:Nstudies){</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt;  alpha[j] ~ dnorm(0, 0.001)</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; }</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; </span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt; ## prior distribution for the main effect of the covariates</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; for(k in 1:Ncovariate){</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="co">#&gt;  beta[k] ~ dnorm(0, 0.001)</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="co">#&gt; }</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="co">#&gt; ## prior distribution for the effect modifiers under no shrinkage</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="co">#&gt; for(k in 1:Ncovariate){</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="co">#&gt;  gamma[k] ~ dnorm(0, 0.001) </span></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="co">#&gt; }</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a><span class="co">#&gt; }</span></span></code></pre></div>
 <p>Once the model is set up using ipdma.model.onestage function, we use ipd.run function to run the model. help(ipd.run) describes possible parameters to specify.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">ipd.run</span>(ipd, <span class="at">pars.save =</span> <span class="fu">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>),</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.chains =</span> <span class="dv">3</span>, <span class="at">n.burnin =</span> <span class="dv">500</span>, <span class="at">n.iter =</span> <span class="dv">5000</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Compiling model graph</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Allocating nodes</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Graph information:</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Observed stochastic nodes: 600</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Unobserved stochastic nodes: 19</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Total graph size: 6034</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Initializing model</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> samples[, <span class="sc">-</span><span class="dv">3</span>]  <span class="co">#remove delta[1] which is 0</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samples)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of chains = 3 </span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             Mean      SD  Naive SE Time-series SE</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]   0.2157 0.02097 0.0001712      0.0002897</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]   0.2743 0.02267 0.0001851      0.0003445</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2] -2.9384 0.09453 0.0007719      0.0009364</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1] -0.5203 0.03033 0.0002476      0.0004146</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2]  0.5510 0.03091 0.0002524      0.0004851</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             2.5%     25%     50%     75%   97.5%</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]   0.1743  0.2016  0.2159  0.2299  0.2567</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]   0.2300  0.2588  0.2744  0.2896  0.3186</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2] -3.1275 -2.9908 -2.9387 -2.8869 -2.7448</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1] -0.5796 -0.5408 -0.5202 -0.4996 -0.4614</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2]  0.4904  0.5303  0.5508  0.5716  0.6123</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(samples) #traceplot and posterior of parameters</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co"># coda::gelman.plot(samples) #gelman diagnostic plot</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>samples &lt;-<span class="st"> </span><span class="kw">ipd.run</span>(ipd, <span class="dt">n.chains =</span> <span class="dv">3</span>, <span class="dt">n.burnin =</span> <span class="dv">500</span>, <span class="dt">n.iter =</span> <span class="dv">5000</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Compiling model graph</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt;    Allocating nodes</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; Graph information:</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;    Observed stochastic nodes: 600</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt;    Unobserved stochastic nodes: 19</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;    Total graph size: 6034</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; </span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; Initializing model</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a></span>
+<span id="cb4-12"><a href="#cb4-12"></a>samples &lt;-<span class="st"> </span>samples[, <span class="dv">-3</span>]  <span class="co">#remove delta[1] which is 0</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="kw">summary</span>(samples)</span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; </span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; Number of chains = 3 </span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; </span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; </span></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt;             Mean      SD  Naive SE Time-series SE</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; alpha[1] 11.0927 0.05330 0.0004352      0.0007817</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; alpha[2]  8.0512 0.05668 0.0004628      0.0009121</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt; alpha[4]  9.6084 0.05062 0.0004133      0.0007013</span></span>
+<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt; alpha[5] 12.9145 0.05356 0.0004373      0.0007973</span></span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="co">#&gt; alpha[6] 15.8189 0.05189 0.0004237      0.0007985</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; beta[1]   0.1666 0.02250 0.0001837      0.0003485</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt; beta[2]   0.2731 0.02067 0.0001688      0.0002867</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; delta[1]  0.0000 0.00000 0.0000000      0.0000000</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt; delta[2] -2.3472 0.76583 0.0062530      0.0061900</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt; gamma[1] -0.5167 0.03041 0.0002483      0.0004696</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt; gamma[2]  0.5539 0.03057 0.0002496      0.0004304</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt; </span></span>
+<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt; </span></span>
+<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt;             2.5%     25%     50%     75%   97.5%</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt; alpha[1] 10.9874 11.0562 11.0932 11.1289 11.1960</span></span>
+<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt; alpha[2]  7.9385  8.0136  8.0512  8.0893  8.1618</span></span>
+<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt; alpha[4]  9.5103  9.5744  9.6081  9.6421  9.7096</span></span>
+<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt; alpha[5] 12.8102 12.8782 12.9142 12.9508 13.0181</span></span>
+<span id="cb4-43"><a href="#cb4-43"></a><span class="co">#&gt; alpha[6] 15.7177 15.7840 15.8187 15.8534 15.9213</span></span>
+<span id="cb4-44"><a href="#cb4-44"></a><span class="co">#&gt; beta[1]   0.1222  0.1516  0.1665  0.1817  0.2105</span></span>
+<span id="cb4-45"><a href="#cb4-45"></a><span class="co">#&gt; beta[2]   0.2330  0.2593  0.2734  0.2868  0.3139</span></span>
+<span id="cb4-46"><a href="#cb4-46"></a><span class="co">#&gt; delta[1]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
+<span id="cb4-47"><a href="#cb4-47"></a><span class="co">#&gt; delta[2] -3.8495 -2.8403 -2.3518 -1.8558 -0.8020</span></span>
+<span id="cb4-48"><a href="#cb4-48"></a><span class="co">#&gt; gamma[1] -0.5761 -0.5373 -0.5166 -0.4965 -0.4568</span></span>
+<span id="cb4-49"><a href="#cb4-49"></a><span class="co">#&gt; gamma[2]  0.4944  0.5334  0.5541  0.5744  0.6139</span></span>
+<span id="cb4-50"><a href="#cb4-50"></a><span class="co"># plot(samples) #traceplot and posterior of parameters</span></span>
+<span id="cb4-51"><a href="#cb4-51"></a><span class="co"># coda::gelman.plot(samples) #gelman diagnostic plot</span></span></code></pre></div>
 <p>We can find patient-specific treatment effect using the treatment.effect function. To do this we need to specify the covariate values for the patient that we want to predict patient-specific treatment effect.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">treatment.effect</span>(ipd, samples, <span class="at">newpatient =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -3.419118 -3.219462 -3.017228</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">treatment.effect</span>(ipd, samples, <span class="dt">newpatient =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; -4.118233 -2.624881 -1.061838</span></span></code></pre></div>
 </div>
 <div id="incorporating-shrinkage-and-variable-selection" class="section level2">
 <h2>Incorporating shrinkage and variable selection</h2>
 <p>For the second example, let’s use the same data, but include shrinkage (i.e. Bayesian LASSO) in the effect modifiers (i.e. treatment-covariate interactions). We can specify Bayesian LASSO by setting shrinkage = “laplace”. Lambda is the shrinkage parameter and we can set the prior for lambda using lambda.prior parameter. The default lambda prior for Bayesian LASSO is <span class="math inline">\(\lambda^{-1} \sim dunif(0,5)\)</span>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ipd <span class="ot">&lt;-</span> <span class="fu">with</span>(ds, <span class="fu">ipdma.model.onestage</span>(<span class="at">y =</span> y, <span class="at">study =</span> studyid,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> treat, <span class="at">X =</span> <span class="fu">cbind</span>(z1, z2), <span class="at">response =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">shrinkage =</span> <span class="st">&quot;laplace&quot;</span>))</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">ipd.run</span>(ipd, <span class="at">pars.save =</span> <span class="fu">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;lambda&quot;</span>, <span class="st">&quot;tt&quot;</span>), <span class="at">n.chains =</span> <span class="dv">3</span>, <span class="at">n.burnin =</span> <span class="dv">500</span>, <span class="at">n.iter =</span> <span class="dv">5000</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Compiling model graph</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Allocating nodes</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Graph information:</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Observed stochastic nodes: 600</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Unobserved stochastic nodes: 20</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Total graph size: 6039</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Initializing model</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samples)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of chains = 3 </span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             Mean      SD  Naive SE Time-series SE</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]   0.2141 0.02173 0.0001774      0.0003339</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]   0.2749 0.02281 0.0001863      0.0003818</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1]  0.0000 0.00000 0.0000000      0.0000000</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2] -2.9382 0.09489 0.0007747      0.0009871</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1] -0.5171 0.03151 0.0002573      0.0005218</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2]  0.5499 0.03101 0.0002532      0.0005403</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lambda    0.3327 0.13422 0.0010959      0.0014624</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tt        2.3755 0.95583 0.0078043      0.0102212</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             2.5%     25%     50%     75%   97.5%</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]   0.1717  0.1994  0.2141  0.2287  0.2568</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]   0.2308  0.2596  0.2749  0.2901  0.3205</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2] -3.1255 -2.9881 -2.9377 -2.8882 -2.7550</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1] -0.5790 -0.5381 -0.5173 -0.4957 -0.4550</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2]  0.4894  0.5289  0.5498  0.5708  0.6107</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lambda    0.2033  0.2375  0.2920  0.3839  0.6898</span></span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tt        1.4122  1.6990  2.0892  2.7461  4.8878</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>ipd &lt;-<span class="st"> </span><span class="kw">with</span>(ds, <span class="kw">ipdma.model.onestage</span>(<span class="dt">y =</span> y, <span class="dt">study =</span> studyid,</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="dt">treat =</span> treat, <span class="dt">X =</span> <span class="kw">cbind</span>(z1, z2), <span class="dt">response =</span> <span class="st">&quot;normal&quot;</span>, <span class="dt">shrinkage =</span> <span class="st">&quot;laplace&quot;</span>))</span>
+<span id="cb6-3"><a href="#cb6-3"></a>samples &lt;-<span class="st"> </span><span class="kw">ipd.run</span>(ipd, <span class="dt">pars.save =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="st">&quot;lambda&quot;</span>, <span class="st">&quot;tt&quot;</span>), <span class="dt">n.chains =</span> <span class="dv">3</span>, <span class="dt">n.burnin =</span> <span class="dv">500</span>, <span class="dt">n.iter =</span> <span class="dv">5000</span>)</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; Compiling model graph</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;    Allocating nodes</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; Graph information:</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;    Observed stochastic nodes: 600</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;    Unobserved stochastic nodes: 20</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;    Total graph size: 6039</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; </span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; Initializing model</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="kw">summary</span>(samples)</span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; </span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; Number of chains = 3 </span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; </span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; </span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt;             Mean      SD  Naive SE Time-series SE</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; beta[1]   0.1653 0.02212 0.0001806      0.0003722</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; beta[2]   0.2748 0.02057 0.0001680      0.0003302</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt; delta[1]  0.0000 0.00000 0.0000000      0.0000000</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; delta[2] -2.3569 0.76231 0.0062242      0.0062243</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt; gamma[1] -0.5144 0.02997 0.0002447      0.0005373</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt; gamma[2]  0.5509 0.03060 0.0002499      0.0005249</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt; lambda    0.3240 0.12605 0.0010292      0.0014112</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt; tt        2.4696 0.95869 0.0078276      0.0105926</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt; </span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt; </span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt;             2.5%     25%     50%     75%   97.5%</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#&gt; beta[1]   0.1212  0.1505  0.1654  0.1799  0.2085</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt; beta[2]   0.2343  0.2609  0.2749  0.2886  0.3153</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt; delta[1]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt; delta[2] -3.8825 -2.8461 -2.3501 -1.8715 -0.8193</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt; gamma[1] -0.5726 -0.5346 -0.5146 -0.4946 -0.4548</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#&gt; gamma[2]  0.4922  0.5301  0.5509  0.5714  0.6115</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="co">#&gt; lambda    0.2033  0.2356  0.2854  0.3701  0.6596</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#&gt; tt        1.5055  1.8002  2.1787  2.8313  5.0371</span></span></code></pre></div>
 <p>We can also use SSVS (stochastic search variable selection) by setting shrinkage = “SSVS”. This time let’s use the binomial dataset. “Ind” is the indicator for assigning a slab prior (instead of a spike prior) i.e. indicator for including a covariate. “eta” is the standard deviation of the slab prior.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ipd <span class="ot">&lt;-</span> <span class="fu">with</span>(ds2, <span class="fu">ipdma.model.onestage</span>(<span class="at">y =</span> y, <span class="at">study =</span> studyid,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> treat, <span class="at">X =</span> <span class="fu">cbind</span>(w1, w2), <span class="at">response =</span> <span class="st">&quot;binomial&quot;</span>,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">shrinkage =</span> <span class="st">&quot;SSVS&quot;</span>))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">ipd.run</span>(ipd, <span class="at">pars.save =</span> <span class="fu">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Ind&quot;</span>, <span class="st">&quot;eta&quot;</span>), <span class="at">n.chains =</span> <span class="dv">3</span>, <span class="at">n.burnin =</span> <span class="dv">500</span>, <span class="at">n.iter =</span> <span class="dv">5000</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Compiling model graph</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Allocating nodes</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Graph information:</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Observed stochastic nodes: 600</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Unobserved stochastic nodes: 21</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Total graph size: 6649</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Initializing model</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samples)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of chains = 3 </span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              Mean      SD  Naive SE Time-series SE</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[1]    0.16533 0.37149 0.0030332       0.008574</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[2]    0.17200 0.37739 0.0030814       0.009513</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]  -0.02552 0.09731 0.0007945       0.001403</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]   0.05304 0.09759 0.0007969       0.001409</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1]  0.00000 0.00000 0.0000000       0.000000</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2]  0.17926 0.27091 0.0022120       0.006006</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eta       1.88639 1.45610 0.0118890       0.042150</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1]  0.00785 0.08494 0.0006935       0.001640</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2] -0.02419 0.08995 0.0007344       0.001653</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              2.5%      25%       50%     75%  97.5%</span></span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[1]    0.00000  0.00000  0.000000 0.00000 1.0000</span></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[2]    0.00000  0.00000  0.000000 0.00000 1.0000</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]  -0.21630 -0.08979 -0.024588 0.03902 0.1651</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]  -0.13239 -0.01373  0.051871 0.11614 0.2535</span></span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1]  0.00000  0.00000  0.000000 0.00000 0.0000</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2] -0.37756  0.02011  0.182957 0.34375 0.7203</span></span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eta       0.04871  0.56327  1.601227 3.04529 4.7804</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1] -0.16852 -0.02644  0.001781 0.03934 0.2044</span></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2] -0.24888 -0.05745 -0.007092 0.01737 0.1396</span></span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="fu">treatment.effect</span>(ipd, samples, <span class="at">newpatient =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))  <span class="co"># binary outcome reports odds ratio</span></span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 0.6671371 1.1927908 2.1225036</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ipd &lt;-<span class="st"> </span><span class="kw">with</span>(ds2, <span class="kw">ipdma.model.onestage</span>(<span class="dt">y =</span> y, <span class="dt">study =</span> studyid,</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    <span class="dt">treat =</span> treat, <span class="dt">X =</span> <span class="kw">cbind</span>(w1, w2), <span class="dt">response =</span> <span class="st">&quot;binomial&quot;</span>,</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="dt">shrinkage =</span> <span class="st">&quot;SSVS&quot;</span>))</span>
+<span id="cb7-4"><a href="#cb7-4"></a>samples &lt;-<span class="st"> </span><span class="kw">ipd.run</span>(ipd, <span class="dt">pars.save =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    <span class="st">&quot;Ind&quot;</span>, <span class="st">&quot;eta&quot;</span>), <span class="dt">n.chains =</span> <span class="dv">3</span>, <span class="dt">n.burnin =</span> <span class="dv">500</span>, <span class="dt">n.iter =</span> <span class="dv">5000</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; Compiling model graph</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;    Allocating nodes</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; Graph information:</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt;    Observed stochastic nodes: 600</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt;    Unobserved stochastic nodes: 21</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt;    Total graph size: 6649</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; </span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; Initializing model</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">summary</span>(samples)</span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; </span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt; Number of chains = 3 </span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt; </span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; </span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt;              Mean      SD  Naive SE Time-series SE</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; Ind[1]    0.15927 0.36594 0.0029879       0.009244</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#&gt; Ind[2]    0.19767 0.39825 0.0032517       0.010316</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#&gt; beta[1]   0.19194 0.09674 0.0007899       0.001255</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#&gt; beta[2]   0.03942 0.10113 0.0008257       0.001594</span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co">#&gt; delta[1]  0.00000 0.00000 0.0000000       0.000000</span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt; delta[2] -0.13557 0.36049 0.0029434       0.005014</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt; eta       1.96340 1.49457 0.0122031       0.045752</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt; gamma[1] -0.00518 0.08612 0.0007032       0.001394</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt; gamma[2]  0.04635 0.10390 0.0008484       0.002133</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt; </span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; </span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt;              2.5%       25%       50%     75%  97.5%</span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt; Ind[1]    0.00000  0.000000  0.000000 0.00000 1.0000</span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt; Ind[2]    0.00000  0.000000  0.000000 0.00000 1.0000</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#&gt; beta[1]   0.00388  0.127129  0.191287 0.25561 0.3831</span></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt; beta[2]  -0.16401 -0.026796  0.042097 0.10653 0.2336</span></span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt; delta[1]  0.00000  0.000000  0.000000 0.00000 0.0000</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt; delta[2] -0.86009 -0.345124 -0.131825 0.07379 0.5812</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt; eta       0.03396  0.595621  1.714467 3.19693 4.8127</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co">#&gt; gamma[1] -0.20357 -0.038593 -0.001112 0.03054 0.1801</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="co">#&gt; gamma[2] -0.11410 -0.007833  0.017468 0.08630 0.3161</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="kw">treatment.effect</span>(ipd, samples, <span class="dt">newpatient =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))  <span class="co"># binary outcome reports odds ratio</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
+<span id="cb7-50"><a href="#cb7-50"></a><span class="co">#&gt; 0.4206599 0.8940541 1.8442153</span></span></code></pre></div>
 </div>
-<div id="fitting-ipd-network-meta-analysis" class="section level2">
-<h2>Fitting IPD network meta-analysis</h2>
+<div id="fitting-one-stage-ipd-network-meta-analysis" class="section level2">
+<h2>Fitting one-stage IPD network meta-analysis</h2>
 <p>We now demonstrate how to run IPD network meta-analysis using this package.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## load in data</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ds <span class="ot">&lt;-</span> <span class="fu">generate_ipdnma_example</span>(<span class="at">type =</span> <span class="st">&quot;continuous&quot;</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ds2 <span class="ot">&lt;-</span> <span class="fu">generate_ipdnma_example</span>(<span class="at">type =</span> <span class="st">&quot;binary&quot;</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ds)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   studyid treat          z1         z2  y</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1       1     2 -0.19822056 -0.1881686  8</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2       1     1 -0.87885004  0.4647292 11</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3       1     1  0.46899248 -0.7925984 11</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4       1     1 -0.05818934 -1.3640491 11</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5       1     1 -0.75655845  0.6328696 11</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6       1     2  0.45755606  1.0542301  9</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## load in data</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>ds &lt;-<span class="st"> </span><span class="kw">generate_ipdnma_example</span>(<span class="dt">type =</span> <span class="st">&quot;continuous&quot;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>ds2 &lt;-<span class="st"> </span><span class="kw">generate_ipdnma_example</span>(<span class="dt">type =</span> <span class="st">&quot;binary&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">head</span>(ds)</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   studyid treat          z1           z2  y</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 1       1     2  0.06051735  0.517791695  9</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 2       1     1  0.99963768 -1.983681235 11</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 3       1     1 -1.17001002 -0.713301704 11</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 4       1     2 -1.29930850 -0.045076496  9</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 5       1     2  0.84904840  0.946693526  8</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 6       1     2  0.19602346 -0.001556904  8</span></span></code></pre></div>
 <p>The main function to set up the function for one-stage IPD network meta-analysis is ipdnma.model.onestage function. The function is very similar to ipdma.model.onestage except that now we have number of treatments greater than 2. Consequently, “treat” parameter is defined differently i.e. 1 assigns baseline treatment and other treatments should be be assigned 2, 3, 4, etc.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># continuous outcome</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ipd <span class="ot">&lt;-</span> <span class="fu">with</span>(ds, <span class="fu">ipdnma.model.onestage</span>(<span class="at">y =</span> y, <span class="at">study =</span> studyid,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> treat, <span class="at">X =</span> <span class="fu">cbind</span>(z1, z2), <span class="at">response =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">shrinkage =</span> <span class="st">&quot;none&quot;</span>))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(ipd<span class="sc">$</span>code)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; model {</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ########## IPD-NMA model</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for (i in 1:Np) {</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  y[i] ~ dnorm(mu[i], sigma)</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  mu[i] &lt;- alpha[studyid[i]] + inprod(beta[], X[i,]) +</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      inprod(gamma[treat[i],], X[i,]) + d[studyid[i],treatment.arm[i]]</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sigma ~ dgamma(0.001, 0.001)</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #####treatment effect</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for(i in 1:Nstudies){</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  w[i,1] &lt;- 0</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  d[i,1] &lt;- 0</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  for(k in 2:na[i]){</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      d[i,k] ~ dnorm(mdelta[i,k], taudelta[i,k])</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      mdelta[i,k] &lt;-  delta[t[i,k]] - delta[t[i,1]] + sw[i,k]</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      taudelta[i,k] &lt;- tau * 2 * (k-1)/k</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      w[i,k] &lt;- d[i,k] - delta[t[i,k]] + delta[t[i,1]]</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      sw[i,k] &lt;- sum(w[i, 1:(k-1)]) / (k-1)</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  }</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; sd ~ dnorm(0, 1)T(0,)</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tau &lt;- pow(sd, -2)</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ## prior distribution for the average treatment effect</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1] &lt;- 0</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for(k in 2:Ntreat){</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  delta[k] ~ dnorm(0, 0.001)</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ## prior distribution for the study intercept</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for (j in 1:Nstudies){</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  alpha[j] ~ dnorm(0, 0.001)</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ## prior distribution for the main effect of the covariates</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for(k in 1:Ncovariate){</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  beta[k] ~ dnorm(0, 0.001)</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ## prior distribution for the effect modifiers under no shrinkage</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; for(k in 1:Ncovariate){</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  gamma[1,k] &lt;- 0</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  for(m in 2:Ntreat){</span></span>
-<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      gamma[m,k] ~ dnorm(0, 0.001) </span></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  }</span></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; }</span></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">ipd.run</span>(ipd, <span class="at">pars.save =</span> <span class="fu">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>),</span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">n.chains =</span> <span class="dv">3</span>, <span class="at">n.burnin =</span> <span class="dv">500</span>, <span class="at">n.iter =</span> <span class="dv">5000</span>)</span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Compiling model graph</span></span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Allocating nodes</span></span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Graph information:</span></span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Observed stochastic nodes: 1000</span></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Unobserved stochastic nodes: 33</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Total graph size: 10133</span></span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-63"><a href="#cb9-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Initializing model</span></span>
-<span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samples)</span>
-<span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-66"><a href="#cb9-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
-<span id="cb9-67"><a href="#cb9-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
-<span id="cb9-68"><a href="#cb9-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of chains = 3 </span></span>
-<span id="cb9-69"><a href="#cb9-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
-<span id="cb9-70"><a href="#cb9-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-71"><a href="#cb9-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
-<span id="cb9-72"><a href="#cb9-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
-<span id="cb9-73"><a href="#cb9-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-74"><a href="#cb9-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               Mean      SD  Naive SE Time-series SE</span></span>
-<span id="cb9-75"><a href="#cb9-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]     0.2119 0.01928 0.0001574      0.0003421</span></span>
-<span id="cb9-76"><a href="#cb9-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]     0.3014 0.01832 0.0001495      0.0003071</span></span>
-<span id="cb9-77"><a href="#cb9-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1]    0.0000 0.00000 0.0000000      0.0000000</span></span>
-<span id="cb9-78"><a href="#cb9-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2]   -3.0117 0.06046 0.0004937      0.0008314</span></span>
-<span id="cb9-79"><a href="#cb9-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[3]   -1.1701 0.06472 0.0005285      0.0009113</span></span>
-<span id="cb9-80"><a href="#cb9-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1,1]  0.0000 0.00000 0.0000000      0.0000000</span></span>
-<span id="cb9-81"><a href="#cb9-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2,1] -0.5870 0.02742 0.0002239      0.0004372</span></span>
-<span id="cb9-82"><a href="#cb9-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[3,1] -0.3686 0.02799 0.0002285      0.0004394</span></span>
-<span id="cb9-83"><a href="#cb9-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1,2]  0.0000 0.00000 0.0000000      0.0000000</span></span>
-<span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2,2]  0.5421 0.02842 0.0002320      0.0004187</span></span>
-<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[3,2]  0.4098 0.02750 0.0002245      0.0004188</span></span>
-<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
-<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               2.5%     25%     50%     75%   97.5%</span></span>
-<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]     0.1748  0.1989  0.2118  0.2250  0.2504</span></span>
-<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]     0.2657  0.2891  0.3014  0.3138  0.3372</span></span>
-<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1]    0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
-<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2]   -3.1345 -3.0495 -3.0105 -2.9737 -2.8926</span></span>
-<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[3]   -1.3001 -1.2107 -1.1699 -1.1294 -1.0406</span></span>
-<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1,1]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
-<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2,1] -0.6407 -0.6054 -0.5867 -0.5686 -0.5332</span></span>
-<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[3,1] -0.4239 -0.3875 -0.3683 -0.3500 -0.3141</span></span>
-<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1,2]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
-<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2,2]  0.4876  0.5232  0.5421  0.5614  0.5980</span></span>
-<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[3,2]  0.3565  0.3912  0.4099  0.4283  0.4641</span></span>
-<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a><span class="fu">treatment.effect</span>(ipd, samples, <span class="at">newpatient =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span>
-<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $`treatment 2`</span></span>
-<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
-<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -3.472544 -3.333593 -3.199844 </span></span>
-<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $`treatment 3`</span></span>
-<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
-<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -1.482046 -1.334889 -1.189920</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># continuous outcome</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>ipd &lt;-<span class="st"> </span><span class="kw">with</span>(ds, <span class="kw">ipdnma.model.onestage</span>(<span class="dt">y =</span> y, <span class="dt">study =</span> studyid,</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="dt">treat =</span> treat, <span class="dt">X =</span> <span class="kw">cbind</span>(z1, z2), <span class="dt">response =</span> <span class="st">&quot;normal&quot;</span>, <span class="dt">shrinkage =</span> <span class="st">&quot;none&quot;</span>))</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">cat</span>(ipd<span class="op">$</span>code)</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; model {</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; </span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; ########## IPD-NMA model</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; for (i in 1:Np) {</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;  y[i] ~ dnorm(mu[i], sigma)</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;  mu[i] &lt;- alpha[studyid[i]] + inprod(beta[], X[i,]) +</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;      inprod(gamma[treat[i],], X[i,]) + d[studyid[i],treatment.arm[i]]</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; }</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; sigma ~ dgamma(0.001, 0.001)</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; </span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt; #####treatment effect</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt; for(i in 1:Nstudies){</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt;  w[i,1] &lt;- 0</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt;  d[i,1] &lt;- 0</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt;  for(k in 2:na[i]){</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt;      d[i,k] ~ dnorm(mdelta[i,k], taudelta[i,k])</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt;      mdelta[i,k] &lt;-  delta[t[i,k]] - delta[t[i,1]] + sw[i,k]</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt;      taudelta[i,k] &lt;- tau * 2 * (k-1)/k</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;      w[i,k] &lt;- d[i,k] - delta[t[i,k]] + delta[t[i,1]]</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt;      sw[i,k] &lt;- sum(w[i, 1:(k-1)]) / (k-1)</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt;  }</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt; }</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt; sd ~ dnorm(0, 1)T(0,)</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="co">#&gt; tau &lt;- pow(sd, -2)</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="co">#&gt; </span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="co">#&gt; ## prior distribution for the average treatment effect</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="co">#&gt; delta[1] &lt;- 0</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="co">#&gt; for(k in 2:Ntreat){</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="co">#&gt;  delta[k] ~ dnorm(0, 0.001)</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="co">#&gt; }</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="co">#&gt; </span></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="co">#&gt; ## prior distribution for the study intercept</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a><span class="co">#&gt; for (j in 1:Nstudies){</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="co">#&gt;  alpha[j] ~ dnorm(0, 0.001)</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="co">#&gt; }</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a><span class="co">#&gt; </span></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="co">#&gt; ## prior distribution for the main effect of the covariates</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="co">#&gt; for(k in 1:Ncovariate){</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a><span class="co">#&gt;  beta[k] ~ dnorm(0, 0.001)</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a><span class="co">#&gt; }</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a><span class="co">#&gt; ## prior distribution for the effect modifiers under no shrinkage</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="co">#&gt; for(k in 1:Ncovariate){</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a><span class="co">#&gt;  gamma[1,k] &lt;- 0</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a><span class="co">#&gt;  for(m in 2:Ntreat){</span></span>
+<span id="cb9-49"><a href="#cb9-49"></a><span class="co">#&gt;      gamma[m,k] ~ dnorm(0, 0.001) </span></span>
+<span id="cb9-50"><a href="#cb9-50"></a><span class="co">#&gt;  }</span></span>
+<span id="cb9-51"><a href="#cb9-51"></a><span class="co">#&gt; }</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="co">#&gt; }</span></span>
+<span id="cb9-53"><a href="#cb9-53"></a>samples &lt;-<span class="st"> </span><span class="kw">ipd.run</span>(ipd, <span class="dt">pars.save =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>),</span>
+<span id="cb9-54"><a href="#cb9-54"></a>    <span class="dt">n.chains =</span> <span class="dv">3</span>, <span class="dt">n.burnin =</span> <span class="dv">500</span>, <span class="dt">n.iter =</span> <span class="dv">5000</span>)</span>
+<span id="cb9-55"><a href="#cb9-55"></a><span class="co">#&gt; Compiling model graph</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
+<span id="cb9-57"><a href="#cb9-57"></a><span class="co">#&gt;    Allocating nodes</span></span>
+<span id="cb9-58"><a href="#cb9-58"></a><span class="co">#&gt; Graph information:</span></span>
+<span id="cb9-59"><a href="#cb9-59"></a><span class="co">#&gt;    Observed stochastic nodes: 1000</span></span>
+<span id="cb9-60"><a href="#cb9-60"></a><span class="co">#&gt;    Unobserved stochastic nodes: 33</span></span>
+<span id="cb9-61"><a href="#cb9-61"></a><span class="co">#&gt;    Total graph size: 10133</span></span>
+<span id="cb9-62"><a href="#cb9-62"></a><span class="co">#&gt; </span></span>
+<span id="cb9-63"><a href="#cb9-63"></a><span class="co">#&gt; Initializing model</span></span>
+<span id="cb9-64"><a href="#cb9-64"></a><span class="kw">summary</span>(samples)</span>
+<span id="cb9-65"><a href="#cb9-65"></a><span class="co">#&gt; </span></span>
+<span id="cb9-66"><a href="#cb9-66"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
+<span id="cb9-67"><a href="#cb9-67"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span id="cb9-68"><a href="#cb9-68"></a><span class="co">#&gt; Number of chains = 3 </span></span>
+<span id="cb9-69"><a href="#cb9-69"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
+<span id="cb9-70"><a href="#cb9-70"></a><span class="co">#&gt; </span></span>
+<span id="cb9-71"><a href="#cb9-71"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span id="cb9-72"><a href="#cb9-72"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span id="cb9-73"><a href="#cb9-73"></a><span class="co">#&gt; </span></span>
+<span id="cb9-74"><a href="#cb9-74"></a><span class="co">#&gt;               Mean      SD  Naive SE Time-series SE</span></span>
+<span id="cb9-75"><a href="#cb9-75"></a><span class="co">#&gt; beta[1]     0.2035 0.01883 0.0001537      0.0003311</span></span>
+<span id="cb9-76"><a href="#cb9-76"></a><span class="co">#&gt; beta[2]     0.3042 0.02078 0.0001697      0.0003855</span></span>
+<span id="cb9-77"><a href="#cb9-77"></a><span class="co">#&gt; delta[1]    0.0000 0.00000 0.0000000      0.0000000</span></span>
+<span id="cb9-78"><a href="#cb9-78"></a><span class="co">#&gt; delta[2]   -2.9863 0.05921 0.0004835      0.0008742</span></span>
+<span id="cb9-79"><a href="#cb9-79"></a><span class="co">#&gt; delta[3]   -1.1801 0.06271 0.0005120      0.0008914</span></span>
+<span id="cb9-80"><a href="#cb9-80"></a><span class="co">#&gt; gamma[1,1]  0.0000 0.00000 0.0000000      0.0000000</span></span>
+<span id="cb9-81"><a href="#cb9-81"></a><span class="co">#&gt; gamma[2,1] -0.5814 0.02813 0.0002297      0.0004301</span></span>
+<span id="cb9-82"><a href="#cb9-82"></a><span class="co">#&gt; gamma[3,1] -0.3287 0.02852 0.0002329      0.0004306</span></span>
+<span id="cb9-83"><a href="#cb9-83"></a><span class="co">#&gt; gamma[1,2]  0.0000 0.00000 0.0000000      0.0000000</span></span>
+<span id="cb9-84"><a href="#cb9-84"></a><span class="co">#&gt; gamma[2,2]  0.5354 0.02896 0.0002364      0.0004787</span></span>
+<span id="cb9-85"><a href="#cb9-85"></a><span class="co">#&gt; gamma[3,2]  0.3893 0.02882 0.0002353      0.0004780</span></span>
+<span id="cb9-86"><a href="#cb9-86"></a><span class="co">#&gt; </span></span>
+<span id="cb9-87"><a href="#cb9-87"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span id="cb9-88"><a href="#cb9-88"></a><span class="co">#&gt; </span></span>
+<span id="cb9-89"><a href="#cb9-89"></a><span class="co">#&gt;               2.5%     25%     50%     75%   97.5%</span></span>
+<span id="cb9-90"><a href="#cb9-90"></a><span class="co">#&gt; beta[1]     0.1663  0.1910  0.2036  0.2159  0.2408</span></span>
+<span id="cb9-91"><a href="#cb9-91"></a><span class="co">#&gt; beta[2]     0.2635  0.2902  0.3042  0.3184  0.3447</span></span>
+<span id="cb9-92"><a href="#cb9-92"></a><span class="co">#&gt; delta[1]    0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
+<span id="cb9-93"><a href="#cb9-93"></a><span class="co">#&gt; delta[2]   -3.1089 -3.0225 -2.9853 -2.9491 -2.8693</span></span>
+<span id="cb9-94"><a href="#cb9-94"></a><span class="co">#&gt; delta[3]   -1.3076 -1.2189 -1.1792 -1.1398 -1.0593</span></span>
+<span id="cb9-95"><a href="#cb9-95"></a><span class="co">#&gt; gamma[1,1]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
+<span id="cb9-96"><a href="#cb9-96"></a><span class="co">#&gt; gamma[2,1] -0.6370 -0.6004 -0.5811 -0.5626 -0.5265</span></span>
+<span id="cb9-97"><a href="#cb9-97"></a><span class="co">#&gt; gamma[3,1] -0.3852 -0.3477 -0.3288 -0.3098 -0.2722</span></span>
+<span id="cb9-98"><a href="#cb9-98"></a><span class="co">#&gt; gamma[1,2]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
+<span id="cb9-99"><a href="#cb9-99"></a><span class="co">#&gt; gamma[2,2]  0.4790  0.5157  0.5354  0.5550  0.5917</span></span>
+<span id="cb9-100"><a href="#cb9-100"></a><span class="co">#&gt; gamma[3,2]  0.3327  0.3699  0.3891  0.4090  0.4458</span></span>
+<span id="cb9-101"><a href="#cb9-101"></a><span class="kw">treatment.effect</span>(ipd, samples, <span class="dt">newpatient =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span>
+<span id="cb9-102"><a href="#cb9-102"></a><span class="co">#&gt; $`treatment 2`</span></span>
+<span id="cb9-103"><a href="#cb9-103"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
+<span id="cb9-104"><a href="#cb9-104"></a><span class="co">#&gt; -3.446742 -3.314446 -3.186788 </span></span>
+<span id="cb9-105"><a href="#cb9-105"></a><span class="co">#&gt; </span></span>
+<span id="cb9-106"><a href="#cb9-106"></a><span class="co">#&gt; $`treatment 3`</span></span>
+<span id="cb9-107"><a href="#cb9-107"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
+<span id="cb9-108"><a href="#cb9-108"></a><span class="co">#&gt; -1.470633 -1.327761 -1.192262</span></span></code></pre></div>
 <p>We can apply shrinkage on the effect modifiers (treatment-covariate interactions) as before.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SSVS</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ipd <span class="ot">&lt;-</span> <span class="fu">with</span>(ds, <span class="fu">ipdnma.model.onestage</span>(<span class="at">y =</span> y, <span class="at">study =</span> studyid,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">treat =</span> treat, <span class="at">X =</span> <span class="fu">cbind</span>(z1, z2), <span class="at">response =</span> <span class="st">&quot;normal&quot;</span>, <span class="at">shrinkage =</span> <span class="st">&quot;SSVS&quot;</span>))</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">ipd.run</span>(ipd, <span class="at">pars.save =</span> <span class="fu">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Ind&quot;</span>, <span class="st">&quot;eta&quot;</span>), <span class="at">n.chains =</span> <span class="dv">3</span>, <span class="at">n.burnin =</span> <span class="dv">500</span>, <span class="at">n.iter =</span> <span class="dv">5000</span>)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Compiling model graph</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Allocating nodes</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Graph information:</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Observed stochastic nodes: 1000</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Unobserved stochastic nodes: 38</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Total graph size: 10155</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Initializing model</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(samples)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Number of chains = 3 </span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               Mean       SD  Naive SE Time-series SE</span></span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[2,1]    0.9999 0.008165 6.667e-05      6.667e-05</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[3,1]    0.9973 0.052212 4.263e-04      1.065e-03</span></span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[2,2]    0.9999 0.008165 6.667e-05      6.667e-05</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[3,2]    0.9988 0.034621 2.827e-04      6.163e-04</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]     0.2106 0.019270 1.573e-04      3.455e-04</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]     0.3031 0.018057 1.474e-04      3.029e-04</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1]    0.0000 0.000000 0.000e+00      0.000e+00</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2]   -3.0115 0.062238 5.082e-04      8.544e-04</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[3]   -1.1705 0.065364 5.337e-04      9.194e-04</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eta         0.7607 0.494359 4.036e-03      1.374e-02</span></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1,1]  0.0000 0.000000 0.000e+00      0.000e+00</span></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2,1] -0.5849 0.027439 2.240e-04      4.326e-04</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[3,1] -0.3670 0.028035 2.289e-04      4.360e-04</span></span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1,2]  0.0000 0.000000 0.000e+00      0.000e+00</span></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2,2]  0.5398 0.027846 2.274e-04      3.990e-04</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[3,2]  0.4076 0.027425 2.239e-04      4.099e-04</span></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               2.5%     25%     50%     75%   97.5%</span></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[2,1]    1.0000  1.0000  1.0000  1.0000  1.0000</span></span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[3,1]    1.0000  1.0000  1.0000  1.0000  1.0000</span></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[2,2]    1.0000  1.0000  1.0000  1.0000  1.0000</span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ind[3,2]    1.0000  1.0000  1.0000  1.0000  1.0000</span></span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[1]     0.1725  0.1978  0.2108  0.2235  0.2486</span></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; beta[2]     0.2669  0.2910  0.3029  0.3152  0.3383</span></span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[1]    0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[2]   -3.1369 -3.0496 -3.0108 -2.9730 -2.8894</span></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; delta[3]   -1.3022 -1.2114 -1.1708 -1.1297 -1.0417</span></span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; eta         0.3146  0.4755  0.6239  0.8689  2.0616</span></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1,1]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2,1] -0.6392 -0.6035 -0.5847 -0.5667 -0.5307</span></span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[3,1] -0.4215 -0.3857 -0.3673 -0.3487 -0.3112</span></span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[1,2]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[2,2]  0.4856  0.5209  0.5398  0.5588  0.5945</span></span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; gamma[3,2]  0.3540  0.3891  0.4075  0.4259  0.4620</span></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="fu">treatment.effect</span>(ipd, samples, <span class="at">newpatient =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $`treatment 2`</span></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -3.472665 -3.332321 -3.195354 </span></span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $`treatment 3`</span></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; -1.483334 -1.334732 -1.187307</span></span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Bayesian LASSO ipd &lt;- with(ds, ipdnma.model.onestage(y =</span></span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="co"># y, study = studyid, treat = treat, X = cbind(z1, z2),</span></span>
-<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a><span class="co"># response = &#39;normal&#39;, shrinkage = &#39;laplace&#39;, lambda.prior</span></span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a><span class="co"># = list(&#39;dgamma&#39;,2,0.1))) samples &lt;- ipd.run(ipd,</span></span>
-<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="co"># pars.save = c(&#39;beta&#39;, &#39;gamma&#39;, &#39;delta&#39;, &#39;lambda&#39;, &#39;tt&#39;),</span></span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="co"># n.chains = 3, n.burnin = 500, n.iter = 5000)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># SSVS</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>ipd &lt;-<span class="st"> </span><span class="kw">with</span>(ds, <span class="kw">ipdnma.model.onestage</span>(<span class="dt">y =</span> y, <span class="dt">study =</span> studyid,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>    <span class="dt">treat =</span> treat, <span class="dt">X =</span> <span class="kw">cbind</span>(z1, z2), <span class="dt">response =</span> <span class="st">&quot;normal&quot;</span>, <span class="dt">shrinkage =</span> <span class="st">&quot;SSVS&quot;</span>))</span>
+<span id="cb10-4"><a href="#cb10-4"></a>samples &lt;-<span class="st"> </span><span class="kw">ipd.run</span>(ipd, <span class="dt">pars.save =</span> <span class="kw">c</span>(<span class="st">&quot;beta&quot;</span>, <span class="st">&quot;gamma&quot;</span>, <span class="st">&quot;delta&quot;</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="st">&quot;Ind&quot;</span>, <span class="st">&quot;eta&quot;</span>), <span class="dt">n.chains =</span> <span class="dv">3</span>, <span class="dt">n.burnin =</span> <span class="dv">500</span>, <span class="dt">n.iter =</span> <span class="dv">5000</span>)</span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; Compiling model graph</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt;    Resolving undeclared variables</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt;    Allocating nodes</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; Graph information:</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt;    Observed stochastic nodes: 1000</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;    Unobserved stochastic nodes: 38</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt;    Total graph size: 10155</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; </span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; Initializing model</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="kw">summary</span>(samples)</span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; </span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; Iterations = 1501:6500</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt; Thinning interval = 1 </span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; Number of chains = 3 </span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; Sample size per chain = 5000 </span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; </span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; 1. Empirical mean and standard deviation for each variable,</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt;    plus standard error of the mean:</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; </span></span>
+<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt;               Mean      SD  Naive SE Time-series SE</span></span>
+<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt; Ind[2,1]    0.9995 0.02309 0.0001885      0.0003235</span></span>
+<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt; Ind[3,1]    0.9785 0.14494 0.0011834      0.0060205</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt; Ind[2,2]    0.9986 0.03739 0.0003053      0.0005795</span></span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt; Ind[3,2]    0.9876 0.11067 0.0009036      0.0037112</span></span>
+<span id="cb10-30"><a href="#cb10-30"></a><span class="co">#&gt; beta[1]     0.2024 0.01928 0.0001574      0.0003250</span></span>
+<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt; beta[2]     0.3059 0.02109 0.0001722      0.0004329</span></span>
+<span id="cb10-32"><a href="#cb10-32"></a><span class="co">#&gt; delta[1]    0.0000 0.00000 0.0000000      0.0000000</span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="co">#&gt; delta[2]   -2.9866 0.05915 0.0004830      0.0008783</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a><span class="co">#&gt; delta[3]   -1.1812 0.06214 0.0005073      0.0009171</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="co">#&gt; eta         0.8369 0.74731 0.0061018      0.0353363</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a><span class="co">#&gt; gamma[1,1]  0.0000 0.00000 0.0000000      0.0000000</span></span>
+<span id="cb10-37"><a href="#cb10-37"></a><span class="co">#&gt; gamma[2,1] -0.5798 0.02839 0.0002318      0.0004445</span></span>
+<span id="cb10-38"><a href="#cb10-38"></a><span class="co">#&gt; gamma[3,1] -0.3269 0.02896 0.0002365      0.0004303</span></span>
+<span id="cb10-39"><a href="#cb10-39"></a><span class="co">#&gt; gamma[1,2]  0.0000 0.00000 0.0000000      0.0000000</span></span>
+<span id="cb10-40"><a href="#cb10-40"></a><span class="co">#&gt; gamma[2,2]  0.5328 0.02921 0.0002385      0.0005036</span></span>
+<span id="cb10-41"><a href="#cb10-41"></a><span class="co">#&gt; gamma[3,2]  0.3873 0.02921 0.0002385      0.0005037</span></span>
+<span id="cb10-42"><a href="#cb10-42"></a><span class="co">#&gt; </span></span>
+<span id="cb10-43"><a href="#cb10-43"></a><span class="co">#&gt; 2. Quantiles for each variable:</span></span>
+<span id="cb10-44"><a href="#cb10-44"></a><span class="co">#&gt; </span></span>
+<span id="cb10-45"><a href="#cb10-45"></a><span class="co">#&gt;               2.5%     25%     50%     75%   97.5%</span></span>
+<span id="cb10-46"><a href="#cb10-46"></a><span class="co">#&gt; Ind[2,1]    1.0000  1.0000  1.0000  1.0000  1.0000</span></span>
+<span id="cb10-47"><a href="#cb10-47"></a><span class="co">#&gt; Ind[3,1]    1.0000  1.0000  1.0000  1.0000  1.0000</span></span>
+<span id="cb10-48"><a href="#cb10-48"></a><span class="co">#&gt; Ind[2,2]    1.0000  1.0000  1.0000  1.0000  1.0000</span></span>
+<span id="cb10-49"><a href="#cb10-49"></a><span class="co">#&gt; Ind[3,2]    1.0000  1.0000  1.0000  1.0000  1.0000</span></span>
+<span id="cb10-50"><a href="#cb10-50"></a><span class="co">#&gt; beta[1]     0.1647  0.1894  0.2024  0.2156  0.2402</span></span>
+<span id="cb10-51"><a href="#cb10-51"></a><span class="co">#&gt; beta[2]     0.2646  0.2917  0.3058  0.3202  0.3476</span></span>
+<span id="cb10-52"><a href="#cb10-52"></a><span class="co">#&gt; delta[1]    0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
+<span id="cb10-53"><a href="#cb10-53"></a><span class="co">#&gt; delta[2]   -3.1069 -3.0230 -2.9857 -2.9495 -2.8714</span></span>
+<span id="cb10-54"><a href="#cb10-54"></a><span class="co">#&gt; delta[3]   -1.3052 -1.2195 -1.1813 -1.1421 -1.0590</span></span>
+<span id="cb10-55"><a href="#cb10-55"></a><span class="co">#&gt; eta         0.3027  0.4653  0.6177  0.8853  3.7834</span></span>
+<span id="cb10-56"><a href="#cb10-56"></a><span class="co">#&gt; gamma[1,1]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
+<span id="cb10-57"><a href="#cb10-57"></a><span class="co">#&gt; gamma[2,1] -0.6352 -0.5987 -0.5798 -0.5607 -0.5247</span></span>
+<span id="cb10-58"><a href="#cb10-58"></a><span class="co">#&gt; gamma[3,1] -0.3835 -0.3468 -0.3272 -0.3075 -0.2692</span></span>
+<span id="cb10-59"><a href="#cb10-59"></a><span class="co">#&gt; gamma[1,2]  0.0000  0.0000  0.0000  0.0000  0.0000</span></span>
+<span id="cb10-60"><a href="#cb10-60"></a><span class="co">#&gt; gamma[2,2]  0.4752  0.5134  0.5328  0.5525  0.5897</span></span>
+<span id="cb10-61"><a href="#cb10-61"></a><span class="co">#&gt; gamma[3,2]  0.3301  0.3676  0.3872  0.4069  0.4445</span></span>
+<span id="cb10-62"><a href="#cb10-62"></a><span class="kw">treatment.effect</span>(ipd, samples, <span class="dt">newpatient =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>))</span>
+<span id="cb10-63"><a href="#cb10-63"></a><span class="co">#&gt; $`treatment 2`</span></span>
+<span id="cb10-64"><a href="#cb10-64"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
+<span id="cb10-65"><a href="#cb10-65"></a><span class="co">#&gt; -3.446273 -3.314349 -3.188055 </span></span>
+<span id="cb10-66"><a href="#cb10-66"></a><span class="co">#&gt; </span></span>
+<span id="cb10-67"><a href="#cb10-67"></a><span class="co">#&gt; $`treatment 3`</span></span>
+<span id="cb10-68"><a href="#cb10-68"></a><span class="co">#&gt;     0.025       0.5     0.975 </span></span>
+<span id="cb10-69"><a href="#cb10-69"></a><span class="co">#&gt; -1.465770 -1.328106 -1.191418</span></span>
+<span id="cb10-70"><a href="#cb10-70"></a><span class="co"># Bayesian LASSO ipd &lt;- with(ds, ipdnma.model.onestage(y =</span></span>
+<span id="cb10-71"><a href="#cb10-71"></a><span class="co"># y, study = studyid, treat = treat, X = cbind(z1, z2),</span></span>
+<span id="cb10-72"><a href="#cb10-72"></a><span class="co"># response = &#39;normal&#39;, shrinkage = &#39;laplace&#39;, lambda.prior</span></span>
+<span id="cb10-73"><a href="#cb10-73"></a><span class="co"># = list(&#39;dgamma&#39;,2,0.1))) samples &lt;- ipd.run(ipd,</span></span>
+<span id="cb10-74"><a href="#cb10-74"></a><span class="co"># pars.save = c(&#39;beta&#39;, &#39;gamma&#39;, &#39;delta&#39;, &#39;lambda&#39;, &#39;tt&#39;),</span></span>
+<span id="cb10-75"><a href="#cb10-75"></a><span class="co"># n.chains = 3, n.burnin = 500, n.iter = 5000)</span></span></code></pre></div>
 <p>p.s. Note that in the network meta-analysis literature, “d” usually refers to average treatment effect and “delta” refers to study-specific treatment effect. In this R package, we have flipped around the two notations.</p>
 </div>
 

@@ -1,8 +1,8 @@
 Package: bipd
 Type: Package
 Title: Bayesian Individual Patient Data Meta-Analysis using 'JAGS'
-Version: 0.2
-Date: 2022-03-02
+Version: 0.3
+Date: 2022-05-30
 Depends: R (>= 2.10)
 Imports: rjags (>= 4-6), coda (>= 0.13), mvtnorm, dplyr
 Suggests: dclone, R2WinBUGS, mice, micemd, miceadds, mitools, knitr,
@@ -15,8 +15,8 @@ Encoding: UTF-8
 RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2022-03-02 13:38:38 UTC; mike
+Packaged: 2022-06-03 18:11:34 UTC; ms19g661
 Author: Michael Seo [aut, cre]
 Maintainer: Michael Seo <swj8874@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-03-02 15:30:05 UTC
+Date/Publication: 2022-06-05 16:10:05 UTC
